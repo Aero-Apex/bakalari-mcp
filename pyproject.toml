@@ -1,9 +1,18 @@
 [project]
 name = "bakalari-mcp"
-version = "2.0.0"
+version = "1.0.0"
 description = "MCP server for the Bakaláři school system: timetable, marks, homework, messages, absence."
 readme = "README.md"
 requires-python = ">=3.11"
+authors = [{ name = "Aero-Apex" }]
+keywords = ["bakalari", "mcp", "school", "timetable", "claude"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Topic :: Education",
+]
 dependencies = [
     "httpx>=0.28.1",
     "mcp>=2.2.0",
@@ -11,8 +20,24 @@ dependencies = [
     "tzdata>=2024.1",
 ]
 
+[project.scripts]
+bakalari-mcp = "bakalari_mcp.cli:main"
+
+[project.urls]
+Repository = "https://github.com/Aero-Apex/bakalari-mcp"
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["bakalari_mcp"]
+
+[tool.hatch.build.targets.sdist]
+include = ["bakalari_mcp", "extension", "tests", "server.py", "README.md", "CHANGELOG.md", "pyproject.toml", ".env.example"]
+
 [dependency-groups]
-dev = ["pytest>=8"]
+dev = ["pytest>=8", "pytest-asyncio>=0.24"]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]

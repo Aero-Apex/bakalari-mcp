@@ -7,7 +7,7 @@ from datetime import date
 import httpx
 import pytest
 
-import server
+from bakalari_mcp import server
 from bakalari_mcp import cookiestore
 from bakalari_mcp import webdata as wd
 from bakalari_mcp.client import BakalariClient

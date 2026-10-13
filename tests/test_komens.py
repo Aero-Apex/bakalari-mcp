@@ -6,7 +6,7 @@ import json
 import httpx
 import pytest
 
-import server
+from bakalari_mcp import server
 from bakalari_mcp import cookiestore, komens
 from bakalari_mcp.client import BakalariClient
 from bakalari_mcp.config import Config

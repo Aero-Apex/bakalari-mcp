@@ -23,17 +23,17 @@ TOKEN_SKEW = 60.0  # renew this many seconds before the token really expires
 
 
 NO_BROWSER_COOKIE = (
-    "No school cookie is stored yet. Paste one with bash deploy.sh (option 1), or let the browser extension send it."
+    "No school cookie is stored yet. Run `bakalari-mcp setup` and choose the cookie login, or let the browser extension send one."
 )
 
 SESSION_ENDED = (
     "The school website logged the session out. Log in again in the browser and paste a fresh cookie "
-    "(bash deploy.sh), or use the username + password login."
+    "(bakalari-mcp setup), or use the username + password login."
 )
 
 COOKIE_REJECTED = (
     "The school's REST API does not accept website cookies (it only takes its own access tokens). The cookie-mode "
-    "tools read the website's pages instead; for the REST API use the username + password login (deploy.sh, option 2)."
+    "tools read the website's pages instead; for the REST API use the username + password login (`bakalari-mcp setup`, password option)."
 )
 
 
@@ -158,8 +158,8 @@ class BakalariClient:
         if age > cfg.cookie_max_age:
             raise AuthError(
                 f"The stored school cookie has not been renewed for {age / 60:.0f} minutes, so the school session has "
-                "probably ended. Paste a fresh cookie with bash deploy.sh (option 1). The keeper log says whether the "
-                "session really ended: journalctl --user -u bakalari-keeper -n 20"
+                "probably ended. Paste a fresh cookie with `bakalari-mcp setup`. The keeper log says whether it really ended: "
+                "`bakalari-mcp service status keeper`, or the log in the data folder."
             )
         return cookie
 
@@ -307,7 +307,7 @@ class BakalariClient:
         if "login" in resp.url.path.lower():
             raise AuthError(
                 "The school website logged the session out. Log in again in the browser and paste a fresh cookie "
-                "(bash deploy.sh), or use the username + password login."
+                "(bakalari-mcp setup), or use the username + password login."
             )
         if resp.status_code >= 400:
             raise BakalariError(f"The school website returned HTTP {resp.status_code} for {path}.", resp.status_code)

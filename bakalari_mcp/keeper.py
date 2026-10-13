@@ -2,7 +2,7 @@
 
 Every few minutes it calls the school's own /sessionextend (what the website's "still there?" popup does),
 stores the cookie the school sends back and notes how long the session still lives. If the session ever ends
-it says so in the log and waits for a new cookie (deploy.sh / --store-cookie), which it picks up by itself.
+it says so in the log and waits for a new cookie (`bakalari-mcp setup`, or `bakalari-mcp store-cookie`), which it picks up by itself.
 """
 
 from __future__ import annotations
@@ -40,7 +40,7 @@ async def run_keeper(
             stored = cookiestore.load(store)
             if stored is None:
                 if state != "empty":
-                    log("no cookie yet - paste one with: bash deploy.sh (option 1)")
+                    log("no cookie yet - run `bakalari-mcp setup` and choose the cookie login")
                 state = "empty"
                 await sleep(interval)
                 continue
@@ -54,7 +54,7 @@ async def run_keeper(
                 if not before.get("remainingTime"):
                     if state != "dead":
                         log("SESSION EXPIRED - the school no longer accepts this cookie. "
-                            "Log in to the website again and paste a fresh cookie (bash deploy.sh).")
+                            "Log in to the website again and paste a fresh cookie (bakalari-mcp setup).")
                     state = "dead"
                     await sleep(interval)
                     continue

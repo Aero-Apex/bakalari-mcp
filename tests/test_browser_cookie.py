@@ -139,7 +139,7 @@ def test_session_status_reports_age_and_remaining_time(tmp_path):
 
 
 def test_messages_in_cookie_mode_use_the_website_never_the_rest_api(tmp_path):
-    import server
+    from bakalari_mcp import server
 
     store = tmp_path / "session.json"
     cookiestore.save(store, "sid=good")
@@ -233,7 +233,7 @@ def test_store_cookie_command_reads_stdin(tmp_path):
 
 
 def test_check_in_cookie_mode_reports_the_session_instead_of_calling_the_api(tmp_path, capsys, monkeypatch):
-    import server
+    from bakalari_mcp import server
 
     store = tmp_path / "session.json"
     cookiestore.save(store, "sid=good", now=time.time() - 60)
@@ -270,7 +270,7 @@ def _site(request):
 
 def _cookie_server(tmp_path, cookie="sid=good"):
     import httpx
-    import server
+    from bakalari_mcp import server
 
     store = tmp_path / "session.json"
     cookiestore.save(store, cookie)
@@ -315,7 +315,7 @@ def _rpc(client, path, method, params=None, host="127.0.0.1:8770", id_=1):
 
 
 def test_http_app_serves_mcp_only_on_the_secret_path_and_allowed_hosts():
-    import server
+    from bakalari_mcp import server
     from starlette.testclient import TestClient
 
     app = server.build_http_app(HTTP_TOKEN, ["mcp.example.com"])
@@ -333,14 +333,14 @@ def test_http_app_serves_mcp_only_on_the_secret_path_and_allowed_hosts():
 
 
 def test_http_app_refuses_a_weak_token():
-    import server
+    from bakalari_mcp import server
 
     with pytest.raises(ConfigError):
         server.build_http_app("short", [])
 
 
 def test_http_app_answers_claude_ai_preflight_but_not_other_origins():
-    import server
+    from bakalari_mcp import server
     from starlette.testclient import TestClient
 
     app = server.build_http_app(HTTP_TOKEN, ["mcp.example.com"])
@@ -359,7 +359,7 @@ def test_http_app_answers_claude_ai_preflight_but_not_other_origins():
 
 
 def test_request_log_masks_the_secret_and_shows_what_was_asked_for():
-    import server
+    from bakalari_mcp import server
     from starlette.testclient import TestClient
 
     lines: list[str] = []
@@ -377,7 +377,7 @@ def test_request_log_masks_the_secret_and_shows_what_was_asked_for():
 
 
 def test_a_secret_split_by_a_pasted_line_break_still_works_but_a_wrong_one_does_not():
-    import server
+    from bakalari_mcp import server
     from starlette.testclient import TestClient
 
     app = server.build_http_app(HTTP_TOKEN, ["mcp.example.com"])
