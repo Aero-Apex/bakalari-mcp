@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Bakaláři MCP cookie sync",
+  "version": "1.0.0",
+  "description": "Keeps your Bakaláři login alive and sends the session cookie to your own Bakaláři MCP server.",
+  "permissions": ["cookies", "alarms", "storage"],
+  "host_permissions": ["https://kadanska.chomutov.cz/*"],
+  "optional_host_permissions": ["http://*/*", "https://*/*"],
+  "background": { "service_worker": "background.js" },
+  "options_ui": { "page": "options.html", "open_in_tab": true },
+  "action": { "default_popup": "popup.html", "default_title": "Bakaláři MCP" }
+}

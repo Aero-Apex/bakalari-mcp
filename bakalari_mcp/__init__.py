@@ -1,0 +1,1 @@
+"""Bakalari MCP server internals."""

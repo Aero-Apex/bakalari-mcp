@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font: 13px/1.45 system-ui, sans-serif; width: 300px; margin: 12px; color: #1c1c1c; }
+    #status { padding: 8px; border-radius: 6px; background: #eee; }
+    .ok { background: #dff3e4 !important; } .bad { background: #fbe0de !important; }
+    button { margin: 10px 6px 0 0; padding: 6px 12px; font: inherit; }
+    small { color: #555; display: block; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <div id="status">Checking...</div>
+  <button id="push">Send now</button><button id="options">Options</button>
+  <small id="when"></small>
+  <script src="popup.js"></script>
+</body>
+</html>

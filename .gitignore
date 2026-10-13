@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.env
+*.tar.gz
+probe-report.txt
+keepalive.log
+session.json
+.session-*.tmp
+.env.*
+!.env.example
+*.pyc

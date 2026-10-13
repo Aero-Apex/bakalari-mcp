@@ -1,0 +1,19 @@
+[project]
+name = "bakalari-mcp"
+version = "2.0.0"
+description = "MCP server for the Bakaláři school system: timetable, marks, homework, messages, absence."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp>=2.2.0",
+    "pydantic>=2.13.5",
+    "tzdata>=2024.1",
+]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
